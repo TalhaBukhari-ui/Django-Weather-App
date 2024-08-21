@@ -5,7 +5,7 @@ import urllib.request
 def index(request):
     if request.method == "POST":
         city = request.POST['city']
-        res = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+city+ '&appid=a680cb287c60eaf3e2c194d73c2a76a9').read()
+        res = urllib.request.urlopen('http://api.openweathermap.org/data/2.5/weather?q='+city).read() #add your own api key 
         json_data = json.loads(res)
         data = {
             'country_code': str(json_data['sys']['country']),
