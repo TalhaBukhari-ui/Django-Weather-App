@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Detector</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f7f9fc;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+        }
+
+        .search-bar {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .search-bar form {
+            display: flex;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 8px;
+            overflow: hidden;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .search-bar input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #007bff;
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            font-size: 1.1em;
+            outline: none;
+        }
+
+        .search-bar input[type="text"]:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.1);
+        }
+
+        .search-bar button {
+            padding: 12px 20px;
+            background: #007bff;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1.1em;
+            border-radius: 0 8px 8px 0;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .search-bar button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .weather-info {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .weather-info p {
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+
+        .weather-info p span {
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .search-bar form {
+                flex-direction: column;
+                max-width: 100%;
+            }
+
+            .search-bar input[type="text"] {
+                border-radius: 8px 8px 0 0;
+                margin-bottom: -1px; /* Remove space between input and button */
+            }
+
+            .search-bar button {
+                border-radius: 0 0 8px 8px;
+                margin-top: -1px; /* Remove space between input and button */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Weather Detector</h1>
+        </header>
+        
+        <main>
+            <div class="search-bar">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input name='city' type="text" id="location" placeholder="Enter city or location">
+                    <button id="search-btn">Search</button>
+                </form>
+            </div>
+
+            <div class="weather-info">
+                {%  if data.country_code %}
+                <p><span>Country Code:</span> {{data.country_code}}</p>
+                <p><span>Coordinates:</span> {{data.coordinate}}</p>
+                <p><span>Feels Like:</span> {{data.temp}}</p>
+                <p><span>Pressure:</span> {{data.pressure}}</p>
+                <p><span>Humidity:</span> {{data.humidity}}</p>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>
